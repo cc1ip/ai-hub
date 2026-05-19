@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Hub - 发现最佳AI工具</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="styles.min.css">
+</head>
+<body>
+<header class="header">
+<div class="header-container">
+<a href="#" class="logo">AI Hub</a>
+<nav class="nav">
+<a href="#" class="nav-link active">首页</a>
+<a href="#" class="nav-link">教程资源</a>
+<a href="#" class="nav-link">关于我们</a>
+</nav>
+<div class="search-box">
+<i data-lucide="search" class="search-icon"></i>
+<input type="text" id="searchInput" placeholder="搜索AI工具...">
+</div>
+<button class="mobile-menu-btn" id="mobileMenuBtn">
+<i data-lucide="menu"></i>
+</button>
+<button class="theme-toggle" id="themeToggle" title="切换主题">
+<i data-lucide="sun" id="themeIcon"></i>
+</button>
+</div>
+</header>
+<aside class="side-nav" id="sideNav">
+<div class="side-nav-header">
+<div class="side-nav-logo">
+<span class="logo-text">AI Hub</span>
+</div>
+<button class="side-nav-toggle" id="sideNavToggle">
+<i data-lucide="chevron-left"></i>
+</button>
+</div>
+<div class="side-nav-divider"></div>
+<nav class="side-nav-menu" id="sideNavMenu"></nav>
+</aside>
+<main class="main-content">
+<section class="hero">
+<div class="hero-bg">
+<div class="hero-blob blob-1"></div>
+<div class="hero-blob blob-2"></div>
+</div>
+<div class="hero-content">
+<h1 class="hero-title">发现最佳AI工具</h1>
+<p class="hero-subtitle">探索全球最优秀的AI应用与资源，提升工作效率</p>
+<div class="quick-links">
+<span class="quick-label">快捷入口:</span>
+<a href="https://huggingface.co" target="_blank" class="quick-link">Hugging Face</a>
+<a href="https://github.com" target="_blank" class="quick-link">GitHub</a>
+<a href="https://www.modelscope.cn" target="_blank" class="quick-link">魔搭</a>
+<a href="https://juejin.cn" target="_blank" class="quick-link">掘金</a>
+<a href="https://www.zhihu.com" target="_blank" class="quick-link">知乎</a>
+</div>
+</div>
+</section>
+<section class="categories-section">
+<div class="categories-wrapper">
+<div class="categories-tabs" id="categoryTabs"></div>
+</div>
+</section>
+<div class="tools-container">
+<div class="tools-grid" id="toolsGrid"></div>
+<div class="empty-state" id="emptyState" style="display: none;">
+<i data-lucide="search-x" class="empty-icon"></i>
+<p>未找到匹配的工具</p>
+</div>
+</div>
+</main>
+<footer class="footer">
+<div class="footer-content">
+<div class="footer-brand">
+<span class="footer-logo">AI Hub</span>
+<p class="footer-tagline">发现最佳AI工具</p>
+</div>
+<div class="footer-links">
+<a href="#" class="footer-link">关于我们</a>
+<a href="#" class="footer-link">联系我们</a>
+</div>
+<p class="footer-copyright">&copy; 2026 AI Hub. All rights reserved.</p>
+</div>
+</footer>
+<button class="back-to-top" id="backToTop" title="返回顶部">
+<i data-lucide="arrow-up"></i>
+</button>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<script src="config.min.js"></script>
+<script src="app.min.js"></script>
+<script>
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+const backToTop = document.getElementById('backToTop');
+const savedTheme = localStorage.getItem('theme') || 'dark';
+if (savedTheme === 'light') {
+document.body.classList.add('theme-light');
+themeIcon.setAttribute('data-lucide', 'moon');
+}
+themeToggle.addEventListener('click', () => {
+document.body.classList.toggle('theme-light');
+if (document.body.classList.contains('theme-light')) {
+themeIcon.setAttribute('data-lucide', 'moon');
+localStorage.setItem('theme', 'light');
+} else {
+themeIcon.setAttribute('data-lucide', 'sun');
+localStorage.setItem('theme', 'dark');
+}
+lucide.createIcons();
+});
+if (backToTop) {
+window.addEventListener('scroll', () => {
+if (window.scrollY > 300) {
+backToTop.classList.add('visible');
+} else {
+backToTop.classList.remove('visible');
+}
+});
+backToTop.addEventListener('click', () => {
+window.scrollTo({
+top: 0,
+behavior: 'smooth'
+});
+});
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Hub - 工具详情</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="styles.min.css">
+<style>
+body {
+padding-left: 0 !important;
+}
+.main-content {
+padding-left: 20px !important;
+padding-top: 80px;
+}
+.detail-container {
+max-width: 800px;
+margin: 0 auto;
+padding: 40px 20px;
+padding-top: 20px;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+.detail-container > * {
+width: 100%;
+max-width: 800px;
+}
+.back-link {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+color: var(--text-secondary);
+text-decoration: none;
+margin-bottom: 32px;
+transition: color 0.2s ease;
+}
+.back-link:hover {
+color: var(--primary);
+}
+.tool-header {
+display: flex;
+align-items: flex-start;
+gap: 24px;
+margin-bottom: 32px;
+padding: 32px;
+background: var(--gradient-card);
+border-radius: 20px;
+border: 1px solid var(--border);
+}
+.tool-icon-large {
+width: 80px;
+height: 80px;
+border-radius: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 32px;
+font-weight: 700;
+color: white;
+flex-shrink: 0;
+}
+.tool-info {
+flex: 1;
+}
+.tool-name {
+font-size: 32px;
+font-weight: 700;
+margin-bottom: 8px;
+}
+.tool-desc {
+font-size: 16px;
+color: var(--text-secondary);
+line-height: 1.6;
+margin-bottom: 16px;
+}
+.tool-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 20px;
+}
+.meta-item {
+display: flex;
+align-items: center;
+gap: 8px;
+color: var(--text-secondary);
+font-size: 14px;
+}
+.meta-item i {
+width: 18px;
+height: 18px;
+color: var(--primary);
+}
+.rating {
+display: flex;
+align-items: center;
+gap: 6px;
+}
+.rating-star {
+color: #F59E0B;
+}
+.tool-tags {
+display: flex;
+flex-wrap: wrap;
+gap: 12px;
+margin-bottom: 32px;
+}
+.tool-tag {
+padding: 8px 16px;
+background: var(--bg-hover);
+border-radius: 20px;
+font-size: 14px;
+color: var(--text-secondary);
+border: 1px solid var(--border);
+}
+.section {
+background: var(--bg-card);
+border: 1px solid var(--border);
+border-radius: 16px;
+padding: 24px;
+margin-bottom: 24px;
+}
+.section-title {
+font-size: 20px;
+font-weight: 600;
+margin-bottom: 16px;
+display: flex;
+align-items: center;
+gap: 8px;
+color: var(--text-primary);
+}
+.section-title i {
+color: var(--primary);
+}
+.highlights-box {
+background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
+border-left: 4px solid var(--primary);
+padding: 16px 20px;
+border-radius: 0 12px 12px 0;
+margin-bottom: 24px;
+}
+.highlights-box p {
+color: var(--text-secondary);
+font-size: 15px;
+line-height: 1.7;
+margin: 0;
+}
+.features-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+gap: 12px;
+}
+.feature-tag {
+display: flex;
+align-items: center;
+gap: 8px;
+padding: 10px 14px;
+background: var(--bg-hover);
+border-radius: 10px;
+font-size: 14px;
+color: var(--text-secondary);
+}
+.feature-tag i {
+width: 14px;
+height: 14px;
+color: var(--accent);
+}
+.platforms-list {
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+}
+.platform-tag {
+padding: 8px 14px;
+background: rgba(99, 102, 241, 0.1);
+border: 1px solid rgba(99, 102, 241, 0.3);
+border-radius: 8px;
+font-size: 14px;
+color: var(--primary);
+}
+.pros-cons {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 20px;
+}
+.pros-box, .cons-box {
+padding: 16px;
+border-radius: 12px;
+}
+.pros-box {
+background: rgba(16, 185, 129, 0.08);
+border: 1px solid rgba(16, 185, 129, 0.2);
+}
+.cons-box {
+background: rgba(239, 68, 68, 0.08);
+border: 1px solid rgba(239, 68, 68, 0.2);
+}
+.pros-box .list-title, .cons-box .list-title {
+font-weight: 600;
+margin-bottom: 12px;
+display: flex;
+align-items: center;
+gap: 6px;
+}
+.pros-box .list-title {
+color: #10B981;
+}
+.cons-box .list-title {
+color: #EF4444;
+}
+.pros-box ul, .cons-box ul {
+list-style: none;
+padding: 0;
+margin: 0;
+}
+.pros-box li, .cons-box li {
+padding: 6px 0;
+font-size: 14px;
+color: var(--text-secondary);
+display: flex;
+align-items: center;
+gap: 8px;
+}
+.pros-box li::before {
+content: '';
+width: 6px;
+height: 6px;
+background: #10B981;
+border-radius: 50%;
+}
+.cons-box li::before {
+content: '';
+width: 6px;
+height: 6px;
+background: #EF4444;
+border-radius: 50%;
+}
+.pricing-info {
+display: flex;
+align-items: center;
+gap: 12px;
+padding: 16px;
+background: var(--bg-hover);
+border-radius: 12px;
+font-size: 15px;
+color: var(--text-secondary);
+}
+.pricing-info i {
+color: var(--secondary);
+}
+.action-buttons {
+display: flex;
+gap: 16px;
+margin-top: 32px;
+padding-top: 32px;
+border-top: 1px solid var(--border);
+}
+.btn {
+flex: 1;
+padding: 14px 24px;
+border-radius: 12px;
+font-size: 16px;
+font-weight: 600;
+border: none;
+cursor: pointer;
+transition: all 0.2s ease;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+text-decoration: none;
+}
+.btn-primary {
+background: var(--gradient-primary);
+color: white;
+}
+.btn-primary:hover {
+transform: translateY(-2px);
+box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+}
+.btn-secondary {
+background: var(--bg-hover);
+color: var(--text-primary);
+border: 1px solid var(--border);
+}
+.btn-secondary:hover {
+background: var(--border);
+}
+.empty-state {
+text-align: center;
+padding: 60px 20px;
+}
+.empty-icon {
+width: 64px;
+height: 64px;
+margin: 0 auto 16px;
+color: var(--text-muted);
+}
+.empty-state p {
+color: var(--text-secondary);
+font-size: 16px;
+}
+@media (max-width: 768px) {
+.tool-header {
+flex-direction: column;
+align-items: flex-start;
+}
+.tool-name {
+font-size: 24px;
+}
+.tool-meta {
+flex-direction: column;
+gap: 12px;
+}
+.pros-cons {
+grid-template-columns: 1fr;
+}
+.action-buttons {
+flex-direction: column;
+}
+}
+</style>
+</head>
+<body>
+<header class="header">
+<div class="header-container">
+<a href="index.html" class="logo">AI Hub</a>
+<nav class="nav">
+<a href="index.html" class="nav-link">首页</a>
+<a href="#" class="nav-link">教程资源</a>
+<a href="#" class="nav-link">关于我们</a>
+</nav>
+<button class="theme-toggle" id="themeToggle" title="切换主题">
+<i data-lucide="sun" id="themeIcon"></i>
+</button>
+</div>
+</header>
+<main class="main-content">
+<div class="detail-container" id="detailContainer">
+<div class="empty-state" id="emptyState">
+<i data-lucide="search-x" class="empty-icon"></i>
+<p>未找到该工具</p>
+<a href="index.html" class="btn btn-secondary" style="margin-top: 20px;">返回首页</a>
+</div>
+</div>
+</main>
+<footer class="footer">
+<div class="footer-content">
+<div class="footer-brand">
+<span class="footer-logo">AI Hub</span>
+<p class="footer-tagline">发现最佳AI工具</p>
+</div>
+<div class="footer-links">
+<a href="#" class="footer-link">关于我们</a>
+<a href="#" class="footer-link">联系我们</a>
+<a href="#" class="footer-link">隐私政策</a>
+</div>
+<p class="footer-copyright">&copy; 2026 AI Hub. All rights reserved.</p>
+</div>
+</footer>
+<script src="config.min.js"></script>
+<script src="app.min.js"></script>
+<script>
+function getInitials(name) {
+return name.charAt(0).toUpperCase();
+}
+function getCategoryName(categoryId) {
+const categories = {
+all: '全部工具',
+writing: 'AI写作工具',
+image: 'AI图像工具',
+video: 'AI视频工具',
+office: 'AI办公工具',
+chatbot: 'AI聊天助手',
+agent: 'AI智能体',
+programming: 'AI编程工具',
+design: 'AI设计工具',
+audio: 'AI音频工具',
+search: 'AI搜索引擎',
+framework: 'AI开发平台',
+model: 'AI训练模型',
+detection: 'AI内容检测',
+prompt: 'AI提示指令',
+learning: 'AI学习网站'
+};
+return categories[categoryId] || categoryId;
+}
+function formatNumber(num) {
+if (num >= 10000) {
+return (num / 10000).toFixed(1) + '万';
+}
+return num.toString();
+}
+function loadToolDetail() {
+const urlParams = new URLSearchParams(window.location.search);
+const toolId = parseInt(urlParams.get('id'));
+if (isNaN(toolId)) {
+document.getElementById('emptyState').style.display = 'block';
+return;
+}
+const tool = tools.find(t => t.id === toolId);
+if (!tool) {
+document.getElementById('emptyState').style.display = 'block';
+return;
+}
+document.getElementById('emptyState').style.display = 'none';
+const detailHTML = `
+<a href="index.html" class="back-link">
+<i data-lucide="arrow-left"></i>
+<span>返回工具列表</span>
+</a>
+<div class="tool-header">
+<div class="tool-icon-large" style="background: ${tool.color}">
+${getInitials(tool.name)}
+</div>
+<div class="tool-info">
+<h1 class="tool-name">${tool.name}</h1>
+<p class="tool-desc">${tool.description}</p>
+<div class="tool-meta">
+<div class="meta-item">
+<i data-lucide="folder"></i>
+<span>${getCategoryName(tool.category)}</span>
+</div>
+<div class="meta-item">
+<i data-lucide="link"></i>
+<span>${tool.url}</span>
+</div>
+</div>
+</div>
+</div>
+${tool.highlights ? `
+<div class="highlights-box">
+<p><strong>工具亮点：</strong>${tool.highlights}</p>
+</div>
+` : ''}
+<div class="tool-tags">
+${tool.tags.map(tag => `<span class="tool-tag">${tag}</span>`).join('')}
+</div>
+${tool.features && tool.features.length > 0 ? `
+<div class="section">
+<h2 class="section-title">
+<i data-lucide="sparkles"></i>
+<span>核心功能</span>
+</h2>
+<div class="features-grid">
+${tool.features.map(feature => `
+<div class="feature-tag">
+<i data-lucide="check"></i>
+<span>${feature}</span>
+</div>
+`).join('')}
+</div>
+</div>
+` : ''}
+${tool.platforms && tool.platforms.length > 0 ? `
+<div class="section">
+<h2 class="section-title">
+<i data-lucide="monitor"></i>
+<span>支持平台</span>
+</h2>
+<div class="platforms-list">
+${tool.platforms.map(platform => `<span class="platform-tag">${platform}</span>`).join('')}
+</div>
+</div>
+` : ''}
+${tool.pricing ? `
+<div class="section">
+<h2 class="section-title">
+<i data-lucide="credit-card"></i>
+<span>价格方案</span>
+</h2>
+<div class="pricing-info">
+<i data-lucide="info"></i>
+<span>${tool.pricing}</span>
+</div>
+</div>
+` : ''}
+${(tool.pros && tool.pros.length > 0) || (tool.cons && tool.cons.length > 0) ? `
+<div class="section">
+<h2 class="section-title">
+<i data-lucide="scale"></i>
+<span>优缺点分析</span>
+</h2>
+<div class="pros-cons">
+${tool.pros && tool.pros.length > 0 ? `
+<div class="pros-box">
+<div class="list-title">
+<i data-lucide="thumbs-up"></i>
+<span>优点</span>
+</div>
+<ul>
+${tool.pros.map(pro => `<li>${pro}</li>`).join('')}
+</ul>
+</div>
+` : ''}
+${tool.cons && tool.cons.length > 0 ? `
+<div class="cons-box">
+<div class="list-title">
+<i data-lucide="thumbs-down"></i>
+<span>缺点</span>
+</div>
+<ul>
+${tool.cons.map(con => `<li>${con}</li>`).join('')}
+</ul>
+</div>
+` : ''}
+</div>
+</div>
+` : ''}
+<div class="action-buttons">
+<a href="${tool.url}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+<i data-lucide="external-link"></i>
+<span>访问官网</span>
+</a>
+<a href="index.html" class="btn btn-secondary">
+<i data-lucide="arrow-left"></i>
+<span>返回列表</span>
+</a>
+</div>
+`;
+document.getElementById('detailContainer').innerHTML = detailHTML;
+lucide.createIcons();
+}
+document.addEventListener('DOMContentLoaded', () => {
+lucide.createIcons();
+loadToolDetail();
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+const savedTheme = localStorage.getItem('theme') || 'dark';
+if (savedTheme === 'light') {
+document.body.classList.add('theme-light');
+themeIcon.setAttribute('data-lucide', 'moon');
+}
+themeToggle.addEventListener('click', () => {
+document.body.classList.toggle('theme-light');
+if (document.body.classList.contains('theme-light')) {
+themeIcon.setAttribute('data-lucide', 'moon');
+localStorage.setItem('theme', 'light');
+} else {
+themeIcon.setAttribute('data-lucide', 'sun');
+localStorage.setItem('theme', 'dark');
+}
+lucide.createIcons();
+});
+});
+</script>
+</body>
+</html>
